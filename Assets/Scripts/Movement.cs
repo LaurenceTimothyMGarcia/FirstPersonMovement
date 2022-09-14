@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float speed = 15f;
     [SerializeField] private float jumpHeight = 10f;
+    [SerializeField] private int maxJump = 2;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
@@ -15,6 +16,7 @@ public class Movement : MonoBehaviour
 
     private Vector3 velocity;
     private bool isGrounded;
+    private int tempJump;
 
     private float xInput;
     private float zInput;
@@ -23,7 +25,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        tempJump = maxJump;
     }
 
     // Update is called once per frame
@@ -45,11 +47,16 @@ public class Movement : MonoBehaviour
 
     private void Jump(bool jumpButton, bool isGrounded)
     {
-        if (isGrounded && jumpButton)
+        if (jumpButton && tempJump > 0)
         {
-            Debug.Log("Jump");
             Vector3 jumpVector = new Vector3(0, jumpHeight, 0);
             playerRB.AddForce(jumpVector, ForceMode.Impulse);
+            tempJump--;
+        }
+
+        if (tempJump <= 0 && isGrounded)
+        {
+            tempJump = maxJump;
         }
     }
 
