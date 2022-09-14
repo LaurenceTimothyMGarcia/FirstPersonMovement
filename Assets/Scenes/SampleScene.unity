@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRB: {fileID: 231202097}
-  speed: 2
+  speed: 10
   jumpHeight: 10
   maxJump: 2
   groundCheck: {fileID: 583487611}

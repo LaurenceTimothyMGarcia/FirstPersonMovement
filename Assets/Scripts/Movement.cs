@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     //Grapple variables
     public bool freeze;
     public bool activeGrapple;
+    [SerializeField] private float grappleSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -134,7 +135,7 @@ public class Movement : MonoBehaviour
         Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
 
         Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
-        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+        Vector3 velocityXZ = displacementXZ * grappleSpeed / (Mathf.Sqrt(-2 * trajectoryHeight / gravity) + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
 
         return velocityXZ + velocityY;
     }
