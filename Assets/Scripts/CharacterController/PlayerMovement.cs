@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float speed = 12f;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float jumpHeight = 3f;
+    [SerializeField] private float jumpHeight = 5f;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
