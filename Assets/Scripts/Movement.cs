@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private Rigidbody playerRB;
 
-    [SerializeField] private float speed = 15f;
+    [SerializeField] private float speed = 2f;
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private int maxJump = 2;
 
@@ -40,8 +40,7 @@ public class Movement : MonoBehaviour
 
     private void Move(float xMove, float zMove)
     {
-        Vector3 direction = transform.right * xMove + transform.forward * zMove;
-
+        Vector3 direction = transform.right * xMove * speed + transform.forward * zMove * speed;
         playerRB.AddForce(direction);
     }
 

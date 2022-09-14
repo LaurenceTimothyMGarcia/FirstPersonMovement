@@ -254,8 +254,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRB: {fileID: 231202097}
-  speed: 15
+  speed: 2
   jumpHeight: 10
+  maxJump: 2
   groundCheck: {fileID: 583487611}
   groundDistance: 0.4
   groundMask:
