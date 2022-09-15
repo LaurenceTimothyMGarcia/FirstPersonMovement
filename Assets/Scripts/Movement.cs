@@ -41,8 +41,12 @@ public class Movement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         MoveInput();
-        Move(xInput, zInput);
         Jump(jumpPressed, isGrounded);
+    }
+
+    void FixedUpdate()
+    {
+        Move(xInput, zInput);
     }
 
     private void Move(float xMove, float zMove)
@@ -52,8 +56,8 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        Vector3 direction = transform.right * xMove * speed + transform.forward * zMove * speed;
-        playerRB.AddForce(direction);
+        Vector3 direction = transform.right * xMove + transform.forward * zMove;
+        playerRB.AddForce(direction.normalized * speed * 10, ForceMode.Force);
     }
 
     private void Jump(bool jumpButton, bool isGrounded)
@@ -82,6 +86,8 @@ public class Movement : MonoBehaviour
         zInput = Input.GetAxisRaw("Vertical");
         jumpPressed = Input.GetButtonDown("Jump");
     }
+
+    
 
     //Grappling tutorial
     private void GrappleFreeze()
