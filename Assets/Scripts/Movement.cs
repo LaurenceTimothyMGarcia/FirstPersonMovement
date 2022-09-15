@@ -87,8 +87,6 @@ public class Movement : MonoBehaviour
         jumpPressed = Input.GetButtonDown("Jump");
     }
 
-    
-
     //Grappling tutorial
     private void GrappleFreeze()
     {
