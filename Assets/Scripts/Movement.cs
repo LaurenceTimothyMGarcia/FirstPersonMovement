@@ -7,8 +7,11 @@ public class Movement : MonoBehaviour
     //Basics, Movement, Jump
     [SerializeField] private Rigidbody playerRB;
     [SerializeField] private float speed = 2f;
-    [SerializeField] private float jumpHeight = 10f;
+    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float jumpHeight = 20f;
     [SerializeField] private int maxJump = 2;
+    [SerializeField] private int groundDrag = 2;
+    [SerializeField] private int airDrag = 0;
 
     //Ground check related variables
     [SerializeField] private Transform groundCheck;
@@ -56,11 +59,38 @@ public class Movement : MonoBehaviour
     {
         if (activeGrapple)
         {
+            playerRB.drag = 0;
             return;
         }
 
         Vector3 direction = transform.right * xMove + transform.forward * zMove;
         playerRB.AddForce(direction.normalized * speed * 10, ForceMode.Force);
+        
+        //Clamp horizontal speed to maxSpeed
+        ControlSpeed();
+        
+        if(isGrounded) 
+        {
+            playerRB.drag = groundDrag; 
+        }
+        else 
+            playerRB.drag = airDrag;
+
+    }
+
+    private void ControlSpeed()
+    {
+        Vector3 flatVelocity = new Vector3(playerRB.velocity.x, 0f, playerRB.velocity.z);
+
+        
+        if(flatVelocity.magnitude > maxSpeed) 
+        {
+            //recalculate speed to be within limits of maxSpeed;
+            Vector3 maxVelocity = flatVelocity.normalized * maxSpeed;
+
+            //set player x and z velocity to new limited velocity
+            playerRB.velocity = new Vector3(maxVelocity.x, playerRB.velocity.y, maxVelocity.z);
+        }
     }
 
     private void Jump(bool jumpButton, bool isGrounded)
