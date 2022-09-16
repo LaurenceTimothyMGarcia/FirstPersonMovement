@@ -78,6 +78,7 @@ public class Movement : MonoBehaviour
 
     }
 
+    //Place at end
     private void ControlSpeed()
     {
         Vector3 flatVelocity = new Vector3(playerRB.velocity.x, 0f, playerRB.velocity.z);
