@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    //Basics, Movement, Jump
     [SerializeField] private Rigidbody playerRB;
-
     [SerializeField] private float speed = 2f;
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private int maxJump = 2;
 
+    //Ground check related variables
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
+    private bool isGrounded;
 
     private Vector3 velocity;
-    private bool isGrounded;
     private int tempJump;
 
+    //Input
     private float xInput;
     private float zInput;
     private bool jumpPressed;
@@ -49,6 +51,7 @@ public class Movement : MonoBehaviour
         Move(xInput, zInput);
     }
 
+    //Movement
     private void Move(float xMove, float zMove)
     {
         if (activeGrapple)
@@ -80,6 +83,7 @@ public class Movement : MonoBehaviour
         }
     }
 
+    //Create Input
     private void MoveInput()
     {
         xInput = Input.GetAxisRaw("Horizontal");
@@ -87,7 +91,7 @@ public class Movement : MonoBehaviour
         jumpPressed = Input.GetButtonDown("Jump");
     }
 
-    //Grappling tutorial
+    //Grappling tutorial//
     private void GrappleFreeze()
     {
         if (freeze)
